@@ -1,0 +1,12 @@
+﻿namespace API.TrenAmbiental.DTO.Model.Cadastro
+{
+    public class EnderecoModel
+    {
+        public int IdUsuario { get; set; }
+        public string Logradouro { get; set; }
+        public string Cep { get; set; }
+        public string Complemento { get; set; }
+        public string Numero { get; set; }
+        public string Condominio { get; set; }
+    }
+}

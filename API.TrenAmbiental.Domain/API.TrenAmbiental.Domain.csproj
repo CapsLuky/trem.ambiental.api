@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Helper"/>
+    <Folder Include="Services\Interfaces\" />
+      <Folder Include="Services\Upload"/>
+  </ItemGroup>
+
+  <ItemGroup>
+      <ProjectReference Include="..\API.TrenAmbiental.Data.Mysql\API.TrenAmbiental.Data.Mysql.csproj"/>
+  </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.2"/>
+        <PackageReference Include="MailKit" Version="3.1.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1"/>
+        <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Notificacoes\**"/>
+        <Compile Remove="DomainObjects\**"/>
+        <Compile Remove="Services\Upload\UploadService.cs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Remove="Notificacoes\**"/>
+        <EmbeddedResource Remove="DomainObjects\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Notificacoes\**"/>
+        <None Remove="DomainObjects\**"/>
+    </ItemGroup>
+
+</Project>

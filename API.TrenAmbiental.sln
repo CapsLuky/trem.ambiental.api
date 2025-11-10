@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.WebApi", "0.WebApi", "{90F4E443-EEBA-4896-A2D0-185290E63574}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.DTO", "1.DTO", "{8C41A592-453E-4317-854C-5EF113BBE560}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{68FF9DF7-CEB6-4A1C-BBA8-A85C97E6C730}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Infrastructure", "3.Infrastructure", "{049AA28F-B8FC-4ED9-BAD2-3211919C0CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.TrenAmbiental.DTO", "API.TrenAmbiental.DTO\API.TrenAmbiental.DTO.csproj", "{FEE850CF-3F9D-43DF-80C1-1B0F7D6D2035}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.TrenAmbiental.Domain", "API.TrenAmbiental.Domain\API.TrenAmbiental.Domain.csproj", "{006CCCC2-7517-47B9-B791-B370B1269105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.TrenAmbiental.Data.Mysql", "API.TrenAmbiental.Data.Mysql\API.TrenAmbiental.Data.Mysql.csproj", "{50A289D8-E27D-413D-B958-BD0C9E597535}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.TrenAmbiental.WebApi", "API.TrenAmbiental.WebApi\API.TrenAmbiental.WebApi.csproj", "{FE61A3C1-2D96-4B89-8BAF-75B4C5754DA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEE850CF-3F9D-43DF-80C1-1B0F7D6D2035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE850CF-3F9D-43DF-80C1-1B0F7D6D2035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE850CF-3F9D-43DF-80C1-1B0F7D6D2035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE850CF-3F9D-43DF-80C1-1B0F7D6D2035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{006CCCC2-7517-47B9-B791-B370B1269105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006CCCC2-7517-47B9-B791-B370B1269105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006CCCC2-7517-47B9-B791-B370B1269105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006CCCC2-7517-47B9-B791-B370B1269105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50A289D8-E27D-413D-B958-BD0C9E597535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A289D8-E27D-413D-B958-BD0C9E597535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50A289D8-E27D-413D-B958-BD0C9E597535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50A289D8-E27D-413D-B958-BD0C9E597535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE61A3C1-2D96-4B89-8BAF-75B4C5754DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE61A3C1-2D96-4B89-8BAF-75B4C5754DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE61A3C1-2D96-4B89-8BAF-75B4C5754DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE61A3C1-2D96-4B89-8BAF-75B4C5754DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FEE850CF-3F9D-43DF-80C1-1B0F7D6D2035} = {8C41A592-453E-4317-854C-5EF113BBE560}
+		{006CCCC2-7517-47B9-B791-B370B1269105} = {68FF9DF7-CEB6-4A1C-BBA8-A85C97E6C730}
+		{50A289D8-E27D-413D-B958-BD0C9E597535} = {049AA28F-B8FC-4ED9-BAD2-3211919C0CA3}
+		{FE61A3C1-2D96-4B89-8BAF-75B4C5754DA2} = {90F4E443-EEBA-4896-A2D0-185290E63574}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E66B1941-121F-4125-885A-B656754F5718}
+	EndGlobalSection
+EndGlobal
