@@ -187,3 +187,12 @@ O projeto está estruturado para facilitar a implementação de testes:
 - Interfaces bem definidas para cada camada
 
 
+---
+
+## 📞 Contato
+
+Para mais informações sobre este projeto, entre em contato:
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lucianorodriguess/)
+
+---
