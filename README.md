@@ -1,93 +1,189 @@
-# API Processamento de Texto
+# 🌱 Tren Ambiental API
 
-API responsável pela extração massiva de textos de documentos via OCR, com capacidade de processar diretórios com gigabytes de arquivos, separando páginas e textos para armazenamento em banco de dados.
+API RESTful desenvolvida em .NET Core para gerenciar um sistema de reciclagem gamificado, onde usuários ganham pontos ao doar materiais recicláveis e podem trocá-los por produtos no catálogo.
 
-## Visão geral e objetivos
-Construir um repositório de consulta para grandes volumes de documentos:
-- Ler diretórios com muitos arquivos (em lote) e processar via OCR.
-- Separar páginas, extrair texto e metadados relevantes.
-- Persistir resultados no banco de dados para buscas e integrações.
-- Disponibilizar endpoints para consulta e automações (busca por texto e metadados, paginação, status de processamento).
+## 📋 Sobre o Projeto
 
-## Funcionalidades
-Funcionalidades atuais (na Web API):
-- Autenticação e autorização via JWT.
-- Versionamento de API e documentação interativa (Swagger/OpenAPI).
-- Camada de acesso a dados baseada em MySQL.
+O Tren Ambiental é uma plataforma que incentiva a reciclagem através de um sistema de pontuação. A API consumido por dois frontends distintos:
 
-Funcionalidades alvo (OCR e consultas):
-- Ingestão de documentos a partir de diretórios ou uploads.
-- Processamento OCR massivo com suporte a paralelismo.
-- Armazenamento de texto extraído e metadados por página/documento.
-- Endpoints de busca e consulta (full-text e filtros por metadados).
-- Monitoramento de filas e status de processamento.
+### 👥 Portal do Cliente
+- Visualização do catálogo de produtos disponíveis para troca
+- Acompanhamento de pontos acumulados
+- Histórico de doações e pesagens
+- Sistema de carrinho e pedidos
+- Ranking de usuários mais engajados
 
-## Arquitetura e camadas
+### 🔧 Portal Administrativo
+- Gestão completa do catálogo de produtos
+- Controle de estoque e disponibilidade
+- Cadastro e configuração de tipos de materiais recicláveis
+- Definição de pontuação por quilo de cada material
+- Lançamento de pesagens e doações recebidas
+- Gerenciamento de pedidos e entregas
+- Relatórios e análises
 
-O projeto segue uma arquitetura em camadas (Clean Architecture), organizada da seguinte forma:
+## 🏗️ Arquitetura
+
+O projeto segue os princípios de **Clean Architecture** e **Domain-Driven Design (DDD)**, organizado em camadas bem definidas:
 
 ```
-API.Contratual.Admin/
-├── 0.Presentation/
-│   └── API.Contratual.WebApi          # Camada de apresentação (Controllers, Endpoints)
-├── 1.Application/
-│   └── API.Contratual.Application     # Lógica de aplicação e orquestração
-├── 2.Dto/
-│   └── API.Contratual.Dto             # Data Transfer Objects
-├── 3.Domain/
-│   └── API.Contratual.Domain          # Entidades, interfaces e regras de negócio
-├── 4.Infrastructure/
-│   ├── API.Contratual.Data.Mysql      # Acesso a dados (MySQL)
-│   └── API.Contratual.Integration.Http # Integrações HTTP externas
-├── 5.CrossCutting/
-│   ├── API.Contratual.CrossCutting    # Utilitários, notificações, helpers
-│   └── API.Contratual.IoC             # Injeção de dependências
-└── 6.Tests/
-    └── API.Contratual.Test            # Testes unitários e de integração
+API.TrenAmbiental/
+├── 0.WebApi/              # Camada de Apresentação
+│   └── API.TrenAmbiental.WebApi
+│       ├── Controllers/   # Endpoints da API
+│       ├── Configurations/# Configurações (Swagger, DI, etc)
+│       └── Bases/         # Controllers base
+│
+├── 1.DTO/                 # Camada de Transferência de Dados
+│   └── API.TrenAmbiental.DTO
+│       ├── Model/         # DTOs de entrada
+│       ├── ViewModel/     # DTOs de saída
+│       ├── Entidade/      # Entidades de domínio
+│       └── DomainObjects/ # Objetos de valor e interfaces
+│
+├── 2.Domain/              # Camada de Domínio
+│   └── API.TrenAmbiental.Domain
+│       └── Services/      # Regras de negócio
+│
+└── 3.Infrastructure/      # Camada de Infraestrutura
+    └── API.TrenAmbiental.Data.Mysql
+        ├── Repositories/  # Acesso a dados
+        └── Interfaces/    # Contratos de repositórios
 ```
 
-### Camadas
+### Padrões e Práticas Implementadas
 
-- **Presentation**: Exposição de endpoints REST para consumo da API
-- **Application**: Orquestração de casos de uso e fluxos de negócio
-- **Dto**: Objetos de transferência de dados entre camadas
-- **Domain**: Núcleo da aplicação com entidades, interfaces e regras de negócio
-- **Infrastructure**: Implementações de acesso a dados e integrações externas
-- **CrossCutting**: Funcionalidades transversais (logging, notificações, helpers)
-- **Tests**: Testes automatizados
+- **Repository Pattern**: Abstração da camada de acesso a dados
+- **Dependency Injection**: Inversão de controle e baixo acoplamento
+- **Service Layer**: Encapsulamento da lógica de negócio
+- **DTO Pattern**: Separação entre modelos de domínio e transferência
+- **Notification Pattern**: Tratamento centralizado de erros e validações
+- **JWT Authentication**: Autenticação stateless baseada em tokens
+- **API Versioning**: Versionamento de endpoints para evolução controlada
+
+## 🚀 Funcionalidades Principais
+
+### Autenticação e Autorização
+- Login com JWT (JSON Web Token)
+- Recuperação e redefinição de senha
+- Controle de acesso baseado em roles (perfis)
+- Tokens com expiração configurável
+
+### Gestão de Usuários
+- Cadastro de clientes e administradores
+- Perfis diferenciados (Cliente, Administrador, etc)
+- Ativação/desativação de contas
+
+### Sistema de Pontuação
+- Cálculo automático de pontos por material reciclado
+- Consulta de saldo de pontos
+- Histórico de pontuações
+- Ranking mensal de usuários
+
+### Pesagem e Coleta
+- Registro de materiais recebidos
+- Conversão automática de peso em pontos
+- Histórico de pesagens por usuário
+- Tipos de materiais configuráveis
+
+### Catálogo de Produtos
+- CRUD completo de produtos
+- Upload de imagens
+- Controle de estoque
+- Produtos ativos/inativos
+- Alertas de estoque baixo
+
+### Sistema de Pedidos (Carrinho)
+- Carrinho de compras com pontos
+- Validação de saldo antes da finalização
+- Histórico de pedidos
+- Status de pedidos (Pendente, Aprovado, Entregue, etc)
+- Expiração automática de pedidos não finalizados
+- Gestão administrativa de pedidos
+
+## 🛠️ Tecnologias Utilizadas
+
+- **.NET Core 3.1+** - Framework principal
+- **ASP.NET Core Web API** - Construção da API RESTful
+- **MySQL** - Banco de dados relacional
+- **Dapper** - Micro ORM para acesso a dados
+- **JWT Bearer** - Autenticação e autorização
+- **Swagger/OpenAPI** - Documentação interativa da API
+- **NLog** - Sistema de logging
+- **Newtonsoft.Json** - Serialização JSON
+- **API Versioning** - Versionamento de endpoints
+
+## 📦 Estrutura de Dependências
+
+```
+WebApi → Domain → DTO
+  ↓        ↓
+Infrastructure
+```
+
+## 🔐 Segurança
+
+- Autenticação JWT com chave secreta configurável
+- Autorização baseada em roles
+- Validação de modelos em todos os endpoints
+- CORS configurável
+- HTTPS recomendado para produção
+- Tokens de recuperação de senha com expiração
+
+## 📊 Endpoints Principais
+
+### Autenticação
+- `POST /api/v1/Autenticacao/login` - Login de usuário
+- `POST /api/v1/Autenticacao/login/alterarsenha` - Alterar senha
+- `GET /api/v1/Autenticacao/login/recriarSenha/{email}` - Recuperar senha
+- `POST /api/v1/Autenticacao/login/redefinirSenha` - Redefinir senha com token
+
+### Cadastro
+- `POST /api/v1/Cadastro` - Criar novo usuário
+- `GET /api/v1/Cadastro/{id}` - Buscar usuário
+- `PUT /api/v1/Cadastro` - Atualizar usuário
+
+### Catálogo
+- `GET /api/v1/Catalogo` - Listar produtos
+- `POST /api/v1/Catalogo` - Criar produto
+- `PUT /api/v1/Catalogo` - Atualizar produto
+- `DELETE /api/v1/Catalogo/{id}` - Remover produto
+
+### Pesagem
+- `POST /api/v1/Pesagem` - Registrar pesagem
+- `GET /api/v1/Pesagem/historico/{idUsuario}` - Histórico de pesagens
+
+### Pontuação
+- `POST /api/v1/Pontuacao` - Consultar pontuação
+- `GET /api/v1/Pontuacao/Saldo` - Consultar saldo
+- `GET /api/v1/Pontuacao/BuscarRanking` - Ranking de usuários
+
+### Carrinho/Pedidos
+- `GET /api/v1/Carrinho/meuCarrinho/{idUsuario}` - Obter carrinho
+- `POST /api/v1/Carrinho/AdicionarItem` - Adicionar item
+- `POST /api/v1/Carrinho/finalizarPedido` - Finalizar pedido
+- `GET /api/v1/Carrinho/historicoDePedido/{idUsuario}` - Histórico
+
+## ⚙️ Configuração e Instalação
+
+### Pré-requisitos
+- .NET Core SDK 3.1 ou superior
+- MySQL Server 5.7+
+- Visual Studio 2019+ ou VS Code
+
+### Passos para Execução
+
+### Roles (Perfis)
+- `1`: Administrador Master
+- `2`: Administrador
+- `3`: Operador
+- `4`: Cliente
+
+## 🧪 Testes
+
+O projeto está estruturado para facilitar a implementação de testes:
+- Injeção de dependências permite mock de serviços
+- Separação clara de responsabilidades
+- Interfaces bem definidas para cada camada
 
 
-## Fluxo de Processamento
-
-1. **Configuração**: Define pasta de origem e configurações por empresa/filial
-2. **Descoberta**: Busca recursiva de arquivos PDF na pasta configurada
-3. **Validação**: Verifica tamanhos de caminhos e nomes de arquivos
-4. **Seleção**: Identifica arquivos novos ou que precisam ser processados
-5. **Cópia**: Cria backup dos arquivos originais (opcional)
-6. **Registro**: Insere registros na tabela de arquivos
-7. **Extração**: Processa cada página do PDF extraindo o texto via OCR
-8. **Armazenamento**: Salva textos extraídos no banco de dados
-9. **Pesquisa**: Executa pesquisas baseadas no dicionário de palavras
-10. **Indexação**: Armazena resultados de pesquisa para consulta rápida
-
-## Principais Endpoints
-
-### Extração de Texto
-- `POST /api/extracao/extrair-texto` - Inicia o processo de extração de texto dos arquivos
-- `POST /api/extracao/reprocessar` - Retenta extração de arquivos com falha
-
-### Pesquisa
-- `POST /api/extracao/pesquisar-dicionario` - Executa pesquisa baseada em dicionário de palavras
-- `POST /api/extracao/palavras` - Cadastra palavras-chave para pesquisa
-
-## Tecnologias
-- .NET 6 (C#)
-- ASP.NET Core Web API
-- MySQL (driver: `MySqlConnector`)
-- Autenticação: JWT (`Microsoft.AspNetCore.Authentication.JwtBearer`)
-- Documentação: Swagger/Swashbuckle
-- Logging: NLog
-
-## Requisitos
-- .NET SDK 6.0+
-- MySQL 8.x (ou compatível)
